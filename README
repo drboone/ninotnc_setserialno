@@ -1,0 +1,67 @@
+# README, Boone, 09/13/20
+# Brief explanation of ninotnc_setserialno
+
+Linux program to turn on serial number enumeration on MCP2221A
+--------------------------------------------------------------
+
+This crude tool turns on the "serial number enumeration" configuration
+bit in a Microchip MCP2221A chip.  This chip is used in the USB
+interface for the "ninotnc" N9600A TNC board.  If the board reports
+a serial number during USB enumeration, then you can use udev rules
+to make the device have a consistent device name each time it is
+connected.
+
+This tool is likely Linux-only.  For Windows, you can use the
+Microchip-supplied utility to change this configuration on the
+MCP2221A.  (It can change other settings too, including customizing
+the actual serial number.)  As of September 2020, this utility can
+be found at:
+
+	http://ww1.microchip.com/downloads/en/DeviceDoc/MCP2221Utility.zip
+
+To build (Debian):
+
+	Clone this github repository
+
+	cd into the resulting directory
+
+	Install the following packages:
+
+		libhidapi-dev
+		libhidapi-hidraw0
+
+	Run make
+
+	You should now have ninotnc_setserialno
+
+To run:
+
+	THERE MUST BE ONLY _ONE_ USB DEVICE connected with an MCP2221
+	chip.  If there's more than one, the program aborts.  If there's
+	only one connected, it will reconfigure it without further ado.
+
+	To see what's connected, run lsusb.  An MCP2221A looks like this:
+
+		Bus 001 Device 041: ID 04d8:00dd Microchip Technology, Inc. 
+
+	The bus and device numbers will vary, but the ID won't.
+
+udev rules:
+
+	create a file named something like 99-n9600a.rules in
+	/etc/udev/rules.d/ containing a line like this (broken onto
+	multiple lines here for clarity, but must be all on one line in
+	the resulting file) for each TNC you want to manage.  Change the
+	unmber in quotes after ATTRS{serial}= to match your device, and
+	the value in quotes after SYMLINK+= to be whatever name you want
+	to have end up in /dev/:
+
+		SUBSYSTEM=="tty",
+		ATTRS{idVendor}=="04d8",
+		ATTRS{idProduct}=="00dd",
+		ATTRS{serial}=="0001401082",
+		SYMLINK+="n9600a-0001401082"
+
+	This example would produce /dev/n9600a-0001401082 for my test board.
+
+Hackery by Dennis Boone, KB8ZQZ
