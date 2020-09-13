@@ -62,6 +62,8 @@ udev rules:
 		ATTRS{serial}=="0001401082",
 		SYMLINK+="n9600a-0001401082"
 
-	This example would produce /dev/n9600a-0001401082 for my test board.
+	This example would produce /dev/n9600a-0001401082 for my test board:
+
+		lrwxrwxrwx  1 root root  7 sep 13 17:20 n9600a-0001401082 -> ttyACM0
 
 Hackery by Dennis Boone, KB8ZQZ
