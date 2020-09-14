@@ -1,25 +1,11 @@
 # README, Boone, 09/13/20
 # Brief explanation of ninotnc_setserialno
 
-Linux program to turn on serial number enumeration on MCP2221A
---------------------------------------------------------------
-
-This crude tool turns on the "serial number enumeration" configuration
-bit in a Microchip MCP2221A chip.  This chip is used in the USB
-interface for the "ninotnc" N9600A TNC board.  If the board reports
-a serial number during USB enumeration, then you can use udev rules
-to make the device have a consistent device name each time it is
-connected.
-
-This tool is likely Linux-only.  For Windows, you can use the
-Microchip-supplied utility to change this configuration on the
-MCP2221A.  (It can change other settings too, including customizing
-the actual serial number.)  As of September 2020, this utility can
-be found at:
-
-	http://ww1.microchip.com/downloads/en/DeviceDoc/MCP2221Utility.zip
+Linux programs to configure USB enumeration fields on MCP2221A
+==============================================================
 
 To build (Debian):
+------------------
 
 	Clone this github repository
 
@@ -34,6 +20,24 @@ To build (Debian):
 
 	You should now have ninotnc_setserialno
 
+ninotnc_setserialno
+-------------------
+
+This crude tool turns on the "serial number enumeration" configuration
+bit in a Microchip MCP2221A chip.  This chip is used in the USB
+interface for the "ninotnc" N9600A TNC board.  If the board reports
+a serial number during USB enumeration, then you can use udev rules
+to make the device have a consistent device name each time it is
+connected.
+
+This tool is likely Linux-only.  For Windows, you can use the
+Microchip-supplied utility to change this configuration on the
+MCP2221A.  (It can change other settings too, including customizing
+the actual serial number.)  As of September 2020, the Microchip
+utility can be found at:
+
+	http://ww1.microchip.com/downloads/en/DeviceDoc/MCP2221Utility.zip
+
 To run:
 
 	THERE MUST BE ONLY _ONE_ USB DEVICE connected with an MCP2221
@@ -46,7 +50,22 @@ To run:
 
 	The bus and device numbers will vary, but the ID won't.
 
+nino_setlabel
+-------------
+
+	This tool sets two of the strings associated with USB enumeration.
+	Specifically, it sets the Manufacturer label to 'TARPN', and the
+	Product label to 'N9600A NinoTNC'.  These strings show up in the
+	Linux kernel messages when the device connects.  Again, probably
+	Linux-only.
+
+	[3548077.334201] hid-generic 0003:04D8:00DD.002C: hiddev0,hidraw3:
+	USB HID v1.11 Device [TARPN            N9600A NinoTNC  ]
+	on usb-0000:00:1a.0-1.3/input2
+
+
 udev rules:
+-----------
 
 	create a file named something like 99-n9600a.rules in
 	/etc/udev/rules.d/ containing a line like this (broken onto
