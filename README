@@ -4,8 +4,16 @@
 Linux programs to configure USB enumeration fields on MCP2221A
 ==============================================================
 
-To build (Debian):
-------------------
+To build (x86 Debian):
+----------------------
+
+	Clone the git repository https://github.com/ZakKemble/libmcp2221
+
+	cd libmcp2221/libmcp2221
+
+	Copy libmcp2221.h to /usr/local/include/
+
+	Copy ./lib/unix/libmcp2221.so and ./lib/unix/libmcp2221.a to /usr/lib/
 
 	Clone this github repository
 
