@@ -76,17 +76,15 @@ udev rules:
 -----------
 
 	create a file named something like 99-n9600a.rules in
-	/etc/udev/rules.d/ containing a line like this (broken onto
-	multiple lines here for clarity, but must be all on one line in
-	the resulting file) for each TNC you want to manage.  Change the
-	unmber in quotes after ATTRS{serial}= to match your device, and
-	the value in quotes after SYMLINK+= to be whatever name you want
-	to have end up in /dev/:
+	/etc/udev/rules.d/ containing lines like this for each TNC you
+	want to manage.  Change the number in quotes after ATTRS{serial}=
+	to match your device, and the value in quotes after SYMLINK+=
+	to be whatever name you want to have end up in /dev/:
 
-		SUBSYSTEM=="tty",
-		ATTRS{idVendor}=="04d8",
-		ATTRS{idProduct}=="00dd",
-		ATTRS{serial}=="0001401082",
+		SUBSYSTEM=="tty", \
+		ATTRS{idVendor}=="04d8", \
+		ATTRS{idProduct}=="00dd", \
+		ATTRS{serial}=="0001401082", \
 		SYMLINK+="n9600a-0001401082"
 
 	This example would produce /dev/n9600a-0001401082 for my test board:
