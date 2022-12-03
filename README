@@ -15,7 +15,7 @@ To build (x86 Debian):
 
 	Copy ./lib/unix/libmcp2221.so and ./lib/unix/libmcp2221.a to /usr/lib/
 
-	Clone this github repository
+	Clone the git repository https://github.com/drboone/ninotnc_setserialno
 
 	cd into the resulting directory
 
