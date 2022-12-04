@@ -1,4 +1,4 @@
-# README, Boone, 09/13/20
+# README, Boone, 12/04/22
 # Brief explanation of ninotnc_setserialno
 
 Linux programs to configure USB enumeration fields on MCP2221A
@@ -13,7 +13,7 @@ To build (x86 Debian):
 
 	Copy libmcp2221.h to /usr/local/include/
 
-	Copy ./lib/unix/libmcp2221.so and ./lib/unix/libmcp2221.a to /usr/lib/
+	Copy ./lib/unix/libmcp2221.so and ./lib/unix/libmcp2221.a to /usr/local/lib/
 
 	Clone the git repository https://github.com/drboone/ninotnc_setserialno
 
@@ -41,10 +41,10 @@ connected.
 This tool is likely Linux-only.  For Windows, you can use the
 Microchip-supplied utility to change this configuration on the
 MCP2221A.  (It can change other settings too, including customizing
-the actual serial number.)  As of September 2020, the Microchip
+the actual serial number.)  As of December, 2022, the Microchip
 utility can be found at:
 
-	http://ww1.microchip.com/downloads/en/DeviceDoc/MCP2221Utility.zip
+	https://ww1.microchip.com/downloads/en/DeviceDoc/MCP2221Utility.zip
 
 To run:
 
@@ -75,7 +75,7 @@ nino_setlabel
 udev rules:
 -----------
 
-	create a file named something like 99-n9600a.rules in
+	Create a file named something like 99-n9600a.rules in
 	/etc/udev/rules.d/ containing lines like this for each TNC you
 	want to manage.  Change the number in quotes after ATTRS{serial}=
 	to match your device, and the value in quotes after SYMLINK+=
